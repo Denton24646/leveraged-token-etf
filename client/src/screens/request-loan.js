@@ -41,7 +41,8 @@ export default class RequestLoan extends React.Component {
       const loanRequest = await LoanRequest.create(dharma, {
         ...this.state
       });
-  
+      await loanRequest.signAsDebtor();
+
       console.log(loanRequest)
     } catch (e) {
       console.log(e)
