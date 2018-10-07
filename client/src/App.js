@@ -1,12 +1,21 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import { Dharma, Web3 } from "@dharmaprotocol/dharma.js";
+
 import getWeb3 from "./utils/getWeb3";
 import truffleContract from "truffle-contract";
 
 import "./App.css";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  constructor() {
+    super()
+    this.state =  {
+      storageValue: 0, web3: null, accounts: null, contract: null
+    }
+
+    this.darma = null;
+  }
 
   componentDidMount = async () => {
     try {
@@ -19,6 +28,11 @@ class App extends Component {
       // Get the contract instance.
       const Contract = truffleContract(SimpleStorageContract);
       Contract.setProvider(web3.currentProvider);
+      this.darma = new Dharma(web3.currentProvider);
+      console.log(this.darma)
+      //create Loan Request with DAI/WETH parameters
+
+
       const instance = await Contract.deployed();
 
       // Set web3, accounts, and contract to the state, and then proceed with an
@@ -32,6 +46,29 @@ class App extends Component {
       console.log(error);
     }
   };
+
+  loanRequest = async () => {
+    console.log(this.darma)
+    // const { LoanRequest } = Dharma.Types;
+
+
+    // await LoanRequest.create(dharma, {
+    //   principalAmount: 100,
+    //   principalToken: "DAI",
+    //   collateralAmount: 10,
+    //   collateralToken: "WETH",
+    //   interestRate: 3.5,
+    //   termDuration: 3,
+    //   termUnit: "months",
+    //   expiresInDuration: 1,
+    //   expiresInUnit: "weeks",
+    // });
+
+    // //Sign load request (default account is considered the debtor)
+    // await loanRequest.signAsDebtor();
+
+  }
+
 
   runExample = async () => {
     const { accounts, contract } = this.state;
