@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dharma, Web3 } from "@dharmaprotocol/dharma.js";
+import { Dharma } from "@dharmaprotocol/dharma.js";
 
 export default class RequestLoan extends React.Component {
 
@@ -25,29 +25,21 @@ export default class RequestLoan extends React.Component {
   }
 
   onSubmit = async () => {
-
     try {
-      console.log("ahhhhh")
-
-      const host = "http://localhost:8545";
-      const provider = new Web3.providers.HttpProvider(host);
-          console.log(provider)
-  
-      const dharma = new Dharma(provider);
-      console.log(dharma)
-  
+      //lets assume user has metamask working
+      const provider = window.web3.currentProvider  
+      const dharma = new Dharma(provider);  
       const { LoanRequest } = Dharma.Types;
-  
       const loanRequest = await LoanRequest.create(dharma, {
         ...this.state
       });
-  
+      //this makes meta mask ask for permission
+      await loanRequest.signAsDebtor();
+
       console.log(loanRequest)
     } catch (e) {
       console.log(e)
     }
-    
-
   }
 
   render() {
