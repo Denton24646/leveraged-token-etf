@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SimpleStorageContract from "./contracts/SimpleStorage.json";
 import { Dharma, Web3 } from "@dharmaprotocol/dharma.js";
-
+import { Navigation } from './navigation/navigation'
 import getWeb3 from "./utils/getWeb3";
 import truffleContract from "truffle-contract";
 
@@ -37,7 +37,7 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -48,9 +48,9 @@ class App extends Component {
   };
 
   loanRequest = async () => {
-    console.log(this.darma)
-    // const { LoanRequest } = Dharma.Types;
+    const { LoanRequest } = Dharma.Types;
 
+    console.log(LoanRequest)
 
     // await LoanRequest.create(dharma, {
     //   principalAmount: 100,
@@ -89,7 +89,7 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <h1>Good to Go!</h1>
+        {/* <h1>Good to Go!</h1>
         <p>Your Truffle Box is installed and ready.</p>
         <h2>Smart Contract Example</h2>
         <p>
@@ -99,7 +99,8 @@ class App extends Component {
         <p>
           Try changing the value stored on <strong>line 37</strong> of App.js.
         </p>
-        <div>The stored value is: {this.state.storageValue}</div>
+        <div>The stored value is: {this.state.storageValue}</div> */}
+        <Navigation />
       </div>
     );
   }
