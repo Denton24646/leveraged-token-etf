@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@0xproject/typescript-typings": "^3.0.2"
+  }
+}

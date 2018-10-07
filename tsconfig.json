@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "typeRoots": [
+      "node_modules/@0xproject/typescript-typings/types",
+      "node_modules/setprotocol.js/src/types",
+      "node_modules/@types"
+    ],
+    "paths": {
+      "*": [
+        "./node_modules/@0xproject/typescript-typings/types/*",
+      ]
+    }
+  }
+}
