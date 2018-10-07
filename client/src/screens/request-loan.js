@@ -25,39 +25,28 @@ export default class RequestLoan extends React.Component {
   }
 
   onSubmit = async () => {
-    console.log("ahhhhh")
 
-    const host = "http://localhost:8545";
-    const provider = new Web3.providers.HttpProvider(host);
-        console.log(provider)
+    try {
+      console.log("ahhhhh")
 
-    const dharma = new Dharma(provider);
-    console.log(dharma)
-
-    const { LoanRequest } = Dharma.Types;
-
-
-
-    const relayerTerms = {
-      ...this.state,
-      /// yooo so i think this has to be the address of the current users meta mask acct
-      relayerAddress: "0xd2f45e02ab7b190ac9a87b743eab4c8f2ed0e491",
-      relayerFeeAmount: .05,
+      const host = "http://localhost:8545";
+      const provider = new Web3.providers.HttpProvider(host);
+          console.log(provider)
+  
+      const dharma = new Dharma(provider);
+      console.log(dharma)
+  
+      const { LoanRequest } = Dharma.Types;
+  
+      const loanRequest = await LoanRequest.create(dharma, {
+        ...this.state
+      });
+  
+      console.log(loanRequest)
+    } catch (e) {
+      console.log(e)
     }
-
-    const loanRequest = await LoanRequest.create(dharma, {
-      principalAmount: 1,
-      principalToken: "WETH",
-      collateralAmount: 20,
-      collateralToken: "REP",
-      interestRate: 3.5,
-      termDuration: 3,
-      termUnit: "months",
-      expiresInDuration: 1,
-      expiresInUnit: "weeks"
-    });
-
-    console.log(loanRequest)
+    
 
   }
 
@@ -68,7 +57,7 @@ export default class RequestLoan extends React.Component {
       <div className="mt-12 flex justify-center">
         <div className="shadow w-2/5 p-12 border-t-4 border-green-light rounded">
           <h3 className="mb-6">Apply for a Loan</h3>
-          <label className="my-3 text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="my-3 text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Principal Amount
           </label>
           <input
@@ -80,7 +69,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="1"
           />
-          <label className="mt-3 text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="mt-3 text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Principal Token
           </label>
           <input
@@ -92,7 +81,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="WETH"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Collatoral Amount
           </label>
           <input
@@ -104,7 +93,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="20"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Collatoral Token
           </label>
           <input
@@ -116,7 +105,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="REP"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Interest Rate
           </label>
           <input
@@ -128,7 +117,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="3.5"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Term Duration
           </label>
           <input
@@ -140,7 +129,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="3"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Term Unit
           </label>
           <input
@@ -152,7 +141,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="months"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Expires In Duration
           </label>
           <input
@@ -164,7 +153,7 @@ export default class RequestLoan extends React.Component {
             onChange={this.onChange}
             placeholder="1"
           />
-          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-city">
+          <label className="text-left block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2">
             Expires In Unit
           </label>
           <input
